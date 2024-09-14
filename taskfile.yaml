@@ -7,3 +7,6 @@ tasks:
   test:
     cmds:
       - go test -cover ./...
+  bench:
+    cmds:
+      - go test ./... -bench=. -benchmem
