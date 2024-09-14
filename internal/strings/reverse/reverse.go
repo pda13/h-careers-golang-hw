@@ -1,4 +1,4 @@
-package strings
+package reverse
 
 import "strings"
 

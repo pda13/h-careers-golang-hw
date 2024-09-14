@@ -6,7 +6,9 @@ tasks:
       - go run cmd/main.go
   test:
     cmds:
+      - go clean -testcache
       - go test -cover ./...
   bench:
     cmds:
+      - go clean -testcache
       - go test ./... -bench=. -benchmem
