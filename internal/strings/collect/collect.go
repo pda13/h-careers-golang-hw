@@ -3,13 +3,13 @@ package collect
 import "strings"
 
 func CollectStringFromRunesUsingConversion(runes []rune) string {
-	result := ""
-	for _, r := range runes {
-		result += string(r)
-	}
+	// result := ""
+	// for _, r := range runes {
+	// 	result += string(r)
+	// }
 
-	// return string(runes)
-	return result
+	// return result
+	return string(runes)
 }
 
 func CollectStringFromRunesUsingBuilder(runes []rune) string {
