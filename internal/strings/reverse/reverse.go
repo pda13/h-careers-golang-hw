@@ -4,10 +4,10 @@ import "strings"
 
 func ReverseStringUsingRunes(original string) string {
 	originalRunes := []rune(original)
-	reversedRunes := make([]rune, len(originalRunes))
+	reversedRunes := make([]rune, 0, len(originalRunes))
 
 	for i := 0; i < len(originalRunes); i++ {
-		reversedRunes[i] = originalRunes[len(originalRunes)-i-1]
+		reversedRunes = append(reversedRunes, originalRunes[len(originalRunes)-i-1])
 	}
 
 	return string(reversedRunes)
