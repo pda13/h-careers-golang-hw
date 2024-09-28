@@ -7,6 +7,7 @@ type FindSubstringResult struct {
 	EndIndexExclusive   int
 }
 
+// bool первым, можно возвращать *FindSubstringResult
 func CustomFindSubstring(original, substring string) (FindSubstringResult, bool) {
 	originalRunes := []rune(original)
 	substringRunes := []rune(substring)

@@ -7,7 +7,7 @@ import (
 
 func RemoveDuplicatesUsingSet[T comparable](original []T) []T {
 	uniqueElements := make([]T, 0)
-	encounteredElements := make(map[T]struct{})
+	encounteredElements := make(map[T]struct{}) // map[T]bool - так не делать
 
 	for _, elem := range original {
 		if _, exists := encounteredElements[elem]; !exists {

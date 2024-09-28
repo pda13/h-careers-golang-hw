@@ -23,5 +23,9 @@ func ReverseStringUsingBuilder(original string) string {
 		builder.WriteRune(originalRunes[i])
 	}
 
+	// for _, r := range original {
+
+	// }
+
 	return builder.String()
 }
