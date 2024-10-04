@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/pda13/h-careers-golang-hw/internal/channels/semaphore"
 
 func main() {
-	fmt.Println("")
+	semaphore.RunSemaphoreExample(5)
 }
