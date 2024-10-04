@@ -1,7 +1,9 @@
 package main
 
-import "github.com/pda13/h-careers-golang-hw/internal/channels/semaphore"
+import (
+	"github.com/pda13/h-careers-golang-hw/internal/channels/workerpool"
+)
 
 func main() {
-	semaphore.RunSemaphoreExample(5)
+	workerpool.RunWorkerPoolExample()
 }
