@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/pda13/h-careers-golang-hw/internal/closing"
+	"github.com/pda13/h-careers-golang-hw/internal/channels/semaphore"
 )
 
 func main() {
-	closing.RunGoroutineClosingExample()
+	semaphore.Foo()
 }

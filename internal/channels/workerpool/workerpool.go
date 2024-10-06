@@ -1,7 +1,8 @@
-package workerpool
+package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -15,6 +16,7 @@ func NewWorker(id int) *Worker {
 	}
 }
 
+// Fanout
 func (w *Worker) Start(jobsChannel <-chan Job, resultsChannel chan<- int) {
 	for job := range jobsChannel {
 		fmt.Printf("woker #%d started job #%+v!\n", w.ID, job)
@@ -43,25 +45,41 @@ func NewJob(value int) *Job {
 }
 
 const (
-	JobsNumber    int = 10
+	JobsNumber    int = 5
 	WorkersNumber int = 3
 )
 
-func RunWorkerPoolExample() {
+func main() {
 	jobsChannel := make(chan Job, JobsNumber)
 	resultsChannel := make(chan int, JobsNumber)
 
-	for w := 0; w < WorkersNumber; w++ {
-		worker := NewWorker(w + 1)
-		go worker.Start(jobsChannel, resultsChannel)
-	}
+	//!!!!
+	go func() {
+		for j := 0; j < JobsNumber; j++ {
+			jobsChannel <- *NewJob(j + 1)
+		}
+		close(jobsChannel)
+	}()
 
-	for j := 0; j < JobsNumber; j++ {
-		jobsChannel <- *NewJob(j + 1)
-	}
-	close(jobsChannel)
+	///!!!!
+	go func() {
+		wg := sync.WaitGroup{}
 
-	for r := 0; r < JobsNumber; r++ {
-		fmt.Println("Result:", <-resultsChannel)
+		for w := 0; w < WorkersNumber; w++ {
+			worker := NewWorker(w + 1)
+
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				worker.Start(jobsChannel, resultsChannel)
+			}()
+		}
+
+		wg.Wait()
+		close(resultsChannel)
+	}()
+
+	for result := range resultsChannel {
+		fmt.Println("Result:", result)
 	}
 }
